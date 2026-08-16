@@ -14,11 +14,13 @@ Le projet combine **Python, Scikit-learn, XGBoost, Feature Engineering, SHAP, Pl
 
 ### 📚 Source des données & préparation
 
-Les données proviennent du dataset **Default of Credit Card Clients**, publié par l’**UCI Machine Learning Repository**. Le jeu contient 30 000 observations et porte sur le risque de défaut de paiement de clients de cartes de crédit. :contentReference[oaicite:0]{index=0}
+Le projet utilise le dataset **Default of Credit Card Clients**, publié par l’**UCI Machine Learning Repository**, consacré à la prédiction du défaut de paiement de clients de cartes de crédit.
 
-Les données sont préparées à travers un pipeline reproductible intégrant le **feature engineering**, le preprocessing et la transformation des variables avant leur utilisation par les modèles de Machine Learning.
+Le dataset original contient **30 000 observations, 23 variables explicatives et 1 variable cible** correspondant au défaut de paiement le mois suivant.
 
-**Source officielle :** [UCI Machine Learning Repository — Default of Credit Card Clients](https://archive.ics.uci.edu/dataset/350/default)
+Les données sont ensuite préparées à travers un pipeline reproductible intégrant le **feature engineering** et le **preprocessing**, permettant de construire des variables financières et comportementales supplémentaires avant l’entraînement des modèles.
+
+**Source officielle :** [UCI Machine Learning Repository — Default of Credit Card Clients](https://archive.ics.uci.edu/dataset/350/default%2Bof%2Bcredit%2Bcard%2Bclients)
 
 L'objectif de **Credit Risk Intelligence** est d'estimer la probabilité de défaut d'un client à partir de ses caractéristiques financières et comportementales, tout en fournissant une interprétation des prédictions.
 
