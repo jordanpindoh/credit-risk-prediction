@@ -4,28 +4,39 @@
 
 ### Explainable Credit Risk Prediction & Portfolio Analytics
 
-Une plateforme de Machine Learning dédiée à l'analyse et à la prédiction du risque de défaut de crédit.
+Plateforme de Machine Learning dédiée à la prédiction, l'analyse et l'explicabilité du risque de défaut de crédit.
 
-Le projet combine **XGBoost**, **feature engineering**, **Explainable AI avec SHAP** et **Streamlit** afin de transformer un modèle de classification en une application complète d'analyse du risque.
+Le projet combine **Python, Scikit-learn, XGBoost, Feature Engineering, SHAP, Plotly et Streamlit** afin de transformer un modèle de classification en une application interactive d'analyse du risque.
 
 ---
 
-## 🎯 Objectif du projet
+# 1. 🎯 PROJET · DONNÉES · APPLICATION
 
-L'objectif de **Credit Risk Intelligence** est d'estimer la probabilité de défaut d'un client à partir de ses caractéristiques financières et comportementales.
+L'objectif de **Credit Risk Intelligence** est d'estimer la probabilité de défaut d'un client à partir de ses caractéristiques financières et comportementales, tout en fournissant une interprétation des prédictions.
 
-La plateforme permet également d'interpréter les prédictions du modèle et d'analyser un portefeuille complet de clients.
-
-Le projet couvre plusieurs niveaux d'analyse :
+La plateforme permet :
 
 - 👤 Analyse individuelle d'un client
 - 🔮 Simulation de profils
-- 🧠 Explainable AI avec SHAP
+- 🧠 Explication des prédictions avec SHAP
 - 📊 Analyse de portefeuille
 - 📈 Monitoring du risque
 - 💾 Export des résultats
 
----
+### Données
+
+Le modèle est entraîné sur le dataset **Default of Credit Card Clients** provenant de l'**UCI Machine Learning Repository**.
+
+
+30 000 observations
+45 variables au total
+44 variables explicatives
+1 variable cible : default payment next month
+
+Classe 0 : 23 364
+Classe 1 :  6 636
+
+Taux de défaut : 22,12 %
 
 ## 🚀 Fonctionnalités principales
 
@@ -68,52 +79,66 @@ Export des résultats de l'analyse de portefeuille au format CSV.
 
 
 
+
+
+
+# 🟩 BLOC 2 — Machine Learning & résultats
+
+
 ---
 
-## 🤖 Machine Learning
+## 🤖 2. Modélisation & résultats
 
-### Modèle
+### Comparaison des modèles
 
-Le modèle principal utilisé dans le projet est un **XGBoost Classifier**.
+Trois modèles ont été entraînés et comparés sur les **6 000 observations du jeu de test**.
 
-Le modèle est intégré dans un pipeline comprenant :
+| Modèle | Accuracy | Precision | Recall | F1 | ROC-AUC | PR-AUC |
+|---|---:|---:|---:|---:|---:|---:|
+| Logistic Regression | 0.8192 | 0.6681 | 0.3625 | 0.4700 | 0.7609 | 0.5320 |
+| Random Forest | 0.8113 | 0.6030 | 0.4303 | 0.5022 | 0.7662 | 0.5443 |
+| **XGBoost** | 0.7628 | 0.4723 | **0.6157** | **0.5345** | **0.7756** | **0.5560** |
 
-1. préparation des données ;
-2. feature engineering ;
-3. preprocessing ;
-4. classification avec XGBoost ;
-5. estimation de la probabilité de défaut.
+**XGBoost a été retenu comme modèle final** grâce à son meilleur Recall, F1-Score, ROC-AUC et PR-AUC sur la classe défaut.
 
-### 🎯 Seuil de décision
+### Optimisation des hyperparamètres
 
-Le seuil opérationnel utilisé par l'application est fixé à :
+Une recherche d'hyperparamètres avec validation croisée a ensuite été réalisée avec le **PR-AUC** comme métrique de sélection.
 
-**55 %**
+**Meilleur PR-AUC CV : 0.5604**
 
-Ainsi :
+| Hyperparamètre | Valeur |
+|---|---:|
+| `n_estimators` | 300 |
+| `learning_rate` | 0.02 |
+| `max_depth` | 6 |
+| `min_child_weight` | 3 |
+| `subsample` | 0.8 |
+| `colsample_bytree` | 0.7 |
+| `gamma` | 0.5 |
 
-- probabilité < 55 % → **Risque acceptable**
-- probabilité ≥ 55 % → **Défaut potentiel**
+### XGBoost optimisé
 
-Ce seuil est utilisé dans les différents modules de l'application afin de conserver une logique de décision cohérente.
+| Métrique | Résultat |
+|---|---:|
+| Accuracy | **0.7658** |
+| Precision | **0.4772** |
+| Recall | **0.6142** |
+| F1-Score | **0.5371** |
+| ROC-AUC | **0.7796** |
+| PR-AUC | **0.5587** |
 
-### 🔢 Features
+### Optimisation du seuil
 
-Le pipeline produit actuellement :
+Plusieurs seuils ont été testés entre 20 % et 70 %.
 
-**48 features après preprocessing**
+Le meilleur F1-score obtenu est :
 
-Les variables exploitées couvrent notamment :
 
-- la limite de crédit ;
-- l'âge ;
-- les caractéristiques démographiques ;
-- l'historique des retards ;
-- les montants des factures ;
-- les montants des paiements ;
-- les ratios de paiement ;
-- différents indicateurs comportementaux issus du feature engineering.
-
+Threshold : 0.6000
+Precision : 0.5423
+Recall    : 0.5313
+F1-Score  : 0.5367
 ---
 
 ## 🧠 Explainable AI — SHAP
@@ -159,7 +184,10 @@ Retard le plus récent        → contribution négative
 Retard moyen                 → contribution négative
 Facture récente              → contribution négative
 
+Le module SHAP permet ainsi de passer d'une simple probabilité de défaut à une
+**explication des facteurs ayant contribué à la prédiction**.
 
+![SHAP Summary](docs/images/shap_summary.png)
 
 ---
 
@@ -201,57 +229,31 @@ L'application suit une architecture séparant la logique métier, le modèle de 
 
                  ---
 
-## ⚙️ Installation
 
-### 1. Cloner le projet
+# 3.  ENGINEERING · APPLICATION · VALIDATION
+
+L'application sépare le traitement des données, la prédiction, l'explicabilité et l'interface utilisateur.
+
+### Architecture
 
 
-git clone <URL_DU_REPOSITORY>
-cd credit-risk-prediction
-
-
----
-
-## 📊 Résultats du projet
-
-Le projet fournit une chaîne complète allant de la préparation des données jusqu'à l'interprétation des prédictions.
-
-Les principaux résultats disponibles dans l'application sont :
-
-- probabilité individuelle de défaut ;
-- classification du niveau de risque ;
-- décision selon le seuil de 55 % ;
-- contributions SHAP individuelles ;
-- segmentation d'un portefeuille ;
-- distribution des probabilités de défaut ;
-- identification des profils présentant le risque le plus élevé ;
-- export des résultats au format CSV.
-
-L'application permet ainsi de passer d'un modèle de Machine Learning isolé à une **plateforme interactive d'analyse du risque de crédit**.
-
----
-
-## ⚠️ Limites du projet
-
-Ce projet est conçu comme un projet de **Data Science / Machine Learning et de portfolio professionnel**.
-
-Les prédictions produites ne constituent pas une décision financière réelle.
-
-Une utilisation dans un environnement bancaire ou financier réel nécessiterait notamment :
-
-- une validation approfondie du modèle ;
-- une analyse des biais et de l'équité ;
-- une validation métier ;
-- une gouvernance du modèle ;
-- un suivi de la dérive des données ;
-- un monitoring des performances ;
-- une validation réglementaire ;
-- une gestion appropriée des données personnelles ;
-- une stratégie de réentraînement du modèle.
-
-Le modèle doit donc être considéré comme un outil d'aide à l'analyse et non comme un système autonome de décision financière.
-
----
+Données client / CSV
+        ↓
+Feature Engineering
+        ↓
+Preprocessing
+        ↓
+XGBoost optimisé
+        ↓
+Probabilité de défaut
+        ├──→ Niveau de risque
+        └──→ SHAP / Explication
+                    ↓
+                Streamlit
+                    ↓
+      Analyse · Simulation · Portefeuille
+                    ↓
+                Monitoring
 
 ## 🔭 Perspectives d'amélioration
 
