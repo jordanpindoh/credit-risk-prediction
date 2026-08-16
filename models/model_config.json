@@ -1,0 +1,6 @@
+{
+    "model": "XGBoost",
+    "threshold": 0.55,
+    "target": "default payment next month",
+    "random_state": 42
+}

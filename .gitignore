@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Variables et secrets
+.env
+.streamlit/secrets.toml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Données locales de test
+data/*.csv
+data/*.xlsx
+
+# Fichiers temporaires
+*.tmp
