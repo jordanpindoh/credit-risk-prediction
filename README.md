@@ -1,6 +1,6 @@
 
 
-# 💳 Credit Risk Intelligence
+# 💳  Explainable Credit Risk Prediction & Portfolio Analytics
 
 ### Explainable Credit Risk Prediction & Portfolio Analytics
 
