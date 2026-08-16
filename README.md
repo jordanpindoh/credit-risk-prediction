@@ -150,7 +150,7 @@ Les contributions SHAP permettent ainsi de passer d'une simple prédiction à un
 
 Le système produit notamment :
 
-```text
+
 Nombre de features SHAP : 48
 
 Ratio de paiement minimum    → contribution négative
@@ -167,7 +167,7 @@ Facture récente              → contribution négative
 
 L'application suit une architecture séparant la logique métier, le modèle de Machine Learning et l'interface utilisateur.
 
-```text
+
                          Données client / CSV
                                   │
                                   ▼
@@ -205,7 +205,7 @@ L'application suit une architecture séparant la logique métier, le modèle de 
 
 ### 1. Cloner le projet
 
-```bash
+
 git clone <URL_DU_REPOSITORY>
 cd credit-risk-prediction
 
@@ -296,6 +296,6 @@ Plusieurs évolutions pourraient être ajoutées au projet :
 
 Le projet comprend également des scripts dédiés à la validation des fonctionnalités principales :
 
-```text
+
 src/test_prediction.py
 src/test_shap.py
