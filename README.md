@@ -312,6 +312,12 @@ Le projet comprend également des scripts dédiés à la validation des fonction
 src/test_prediction.py
 src/test_shap.py
 
+### 🚀 Tester l'application
+
+Après installation des dépendances, lancer l'application avec :
+
+
+python -m streamlit run app/streamlit_app.py
 
 <img width="1440" height="900" alt="Capture d’écran 2026-08-16 à 08 42 13" src="https://github.com/user-attachments/assets/8aa96b9a-9e6b-4e39-be73-afe9f089c14a" />
 
